@@ -11,12 +11,20 @@ using System.Windows.Forms;
 
 namespace ChuDe1_Nhom3 {
     public partial class frmDangNhap : Form {
+        private frmMain main;
+
         public frmDangNhap() {
             InitializeComponent();
         }
 
+        public frmDangNhap(frmMain main) {
+            InitializeComponent();
+            this.main = main;
+        }
+
         private void frmDangNhap_Load(object sender, EventArgs e) {
             dangnhapBtn.Enabled = false;
+            taikhoanTextBox.Select();
         }
 
         private void taikhoanTextBox_TextChanged(object sender, EventArgs e) {
@@ -53,12 +61,19 @@ namespace ChuDe1_Nhom3 {
                 return;
             }
 
-            reader.Read(); 
+            reader.Read();
 
             MyPublic.tenTaiKhoan = reader.GetString(0);
             MyPublic.quyenSD = reader.GetString(1);
             MyPublic.maTT = reader.GetString(2);
             MyPublic.connection.Close();
+
+            main.mnuDulieu.Enabled = true;
+            main.mnuTienich.Enabled = true;
+            main.mnuDoimatkhau.Enabled = true;
+            main.mnuThoatdangnhap.Enabled = true;
+
+            this.Close();
         }
 
         private void dongBtn_Click(object sender, EventArgs e) {

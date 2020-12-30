@@ -191,6 +191,7 @@
             this.Name = "frmMain";
             this.Text = "Quản lý bài thi";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -201,22 +202,22 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mnuDulieu;
         private System.Windows.Forms.ToolStripMenuItem mnuTaikhoan;
         private System.Windows.Forms.ToolStripMenuItem mnuLop;
         private System.Windows.Forms.ToolStripMenuItem mnuMon;
         private System.Windows.Forms.ToolStripMenuItem mnuBaithi;
         private System.Windows.Forms.ToolStripMenuItem mnuTrungtam;
-        private System.Windows.Forms.ToolStripMenuItem mnuTienich;
         private System.Windows.Forms.ToolStripMenuItem mnuBaithitheomon;
         private System.Windows.Forms.ToolStripMenuItem mnuBaithitheolop;
         private System.Windows.Forms.ToolStripMenuItem mnuTuychon;
-        private System.Windows.Forms.ToolStripMenuItem mnuDangnhap;
-        private System.Windows.Forms.ToolStripMenuItem mnuDoimatkhau;
-        private System.Windows.Forms.ToolStripMenuItem mnuThoatdangnhap;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuGioithieu;
         private System.Windows.Forms.ToolStripMenuItem mnuThoat;
+        public System.Windows.Forms.ToolStripMenuItem mnuDulieu;
+        public System.Windows.Forms.ToolStripMenuItem mnuTienich;
+        public System.Windows.Forms.ToolStripMenuItem mnuDangnhap;
+        public System.Windows.Forms.ToolStripMenuItem mnuDoimatkhau;
+        public System.Windows.Forms.ToolStripMenuItem mnuThoatdangnhap;
     }
 }
 

@@ -12,7 +12,14 @@ namespace ChuDe1_Nhom3 {
     public partial class frmMain : Form {
         public frmMain() {
             InitializeComponent();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e) {
             MyPublic.createConnection();
+            mnuDulieu.Enabled = false;
+            mnuTienich.Enabled = false;
+            mnuDoimatkhau.Enabled = false;
+            mnuThoatdangnhap.Enabled = false;
         }
 
         private void mnuThoat_Click(object sender, EventArgs e) {
@@ -24,10 +31,9 @@ namespace ChuDe1_Nhom3 {
         }
 
         private void mnuDangnhap_Click(object sender, EventArgs e) {
-            frmDangNhap dangnhap = new frmDangNhap();
+            frmDangNhap dangnhap = new frmDangNhap(this);
             dangnhap.Show();
         }
-
 
     }
 }
