@@ -84,6 +84,7 @@
             this.matkhauTextBox.Size = new System.Drawing.Size(222, 30);
             this.matkhauTextBox.TabIndex = 4;
             this.matkhauTextBox.TextChanged += new System.EventHandler(this.matkhauTextBox_TextChanged);
+            this.matkhauTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.matkhauTextBox_KeyDown);
             // 
             // dangnhapBtn
             // 

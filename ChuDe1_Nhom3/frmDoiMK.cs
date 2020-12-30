@@ -79,5 +79,15 @@ namespace ChuDe1_Nhom3 {
             MessageBox.Show("Cập nhật mật khẩu thành công!", "Thông Báo", MessageBoxButtons.OK);
             this.Close();
         }
+
+        private void xacnhanTextBox_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                doimkBtn.PerformClick();
+            }
+        }
+
+        private void dongBtn_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }

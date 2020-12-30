@@ -83,5 +83,11 @@ namespace ChuDe1_Nhom3 {
         private void dongBtn_Click(object sender, EventArgs e) {
             this.Close();
         }
+
+        private void matkhauTextBox_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                dangnhapBtn.PerformClick();
+            }
+        }
     }
 }

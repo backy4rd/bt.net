@@ -102,6 +102,7 @@
             this.dongBtn.TabIndex = 15;
             this.dongBtn.Text = "Đóng Form";
             this.dongBtn.UseVisualStyleBackColor = true;
+            this.dongBtn.Click += new System.EventHandler(this.dongBtn_Click);
             // 
             // label4
             // 
@@ -121,6 +122,7 @@
             this.xacnhanTextBox.Size = new System.Drawing.Size(222, 30);
             this.xacnhanTextBox.TabIndex = 13;
             this.xacnhanTextBox.TextChanged += new System.EventHandler(this.xacnhanTextBox_TextChanged);
+            this.xacnhanTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.xacnhanTextBox_KeyDown);
             // 
             // frmDoiMK
             // 
