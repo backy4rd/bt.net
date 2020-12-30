@@ -153,6 +153,7 @@
             this.mnuDoimatkhau.Name = "mnuDoimatkhau";
             this.mnuDoimatkhau.Size = new System.Drawing.Size(227, 28);
             this.mnuDoimatkhau.Text = "Đổi mật khẩu";
+            this.mnuDoimatkhau.Click += new System.EventHandler(this.mnuDoimatkhau_Click);
             // 
             // mnuThoatdangnhap
             // 

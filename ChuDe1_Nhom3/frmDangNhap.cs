@@ -58,6 +58,7 @@ namespace ChuDe1_Nhom3 {
             // handle login fail
             if (!reader.HasRows) {
                 MessageBox.Show("Tên tài khoản hoặc mật khẩu không chính xác!", "Thông Báo", MessageBoxButtons.OK);
+                reader.Close();
                 return;
             }
 
@@ -72,7 +73,9 @@ namespace ChuDe1_Nhom3 {
             main.mnuTienich.Enabled = true;
             main.mnuDoimatkhau.Enabled = true;
             main.mnuThoatdangnhap.Enabled = true;
+            main.mnuDangnhap.Enabled = false;
 
+            reader.Close();
             this.Close();
         }
 

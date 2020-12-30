@@ -35,5 +35,10 @@ namespace ChuDe1_Nhom3 {
             dangnhap.Show();
         }
 
+        private void mnuDoimatkhau_Click(object sender, EventArgs e) {
+            frmDoiMK doimk = new frmDoiMK();
+            doimk.Show();
+        }
+
     }
 }
