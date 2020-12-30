@@ -40,6 +40,9 @@ namespace ChuDe1_Nhom3
             MyPublic.OpenData(query, dataSet, "NguoiSuDung");
 
             dsTKGridView.DataSource = dataSet.Tables["NguoiSuDung"];
+            dsTKGridView.Columns[0].Width = 139;
+            dsTKGridView.Columns[1].Width = 139;
+            dsTKGridView.Columns[2].Width = 139;
         }
     }
 }

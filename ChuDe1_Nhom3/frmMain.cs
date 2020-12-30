@@ -63,7 +63,7 @@ namespace ChuDe1_Nhom3
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-            frmDangNhap dangnhap = new frmDangNhap();
+            frmDangNhap dangnhap = new frmDangNhap(this);
             dangnhap.Show();
         }
 
