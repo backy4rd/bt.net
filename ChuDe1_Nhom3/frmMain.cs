@@ -23,7 +23,7 @@ namespace ChuDe1_Nhom3 {
         }
 
         private void mnuThoat_Click(object sender, EventArgs e) {
-            this.Close();
+            Application.Exit();
         }
 
         private void mnuGioithieu_Click(object sender, EventArgs e) {
