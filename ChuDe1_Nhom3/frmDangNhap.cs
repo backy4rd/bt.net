@@ -24,6 +24,7 @@ namespace ChuDe1_Nhom3 {
 
         private void frmDangNhap_Load(object sender, EventArgs e) {
             dangnhapBtn.Enabled = false;
+            matkhauTextBox.PasswordChar = '*';
             taikhoanTextBox.Select();
         }
 
