@@ -160,6 +160,7 @@
             this.mnuThoatdangnhap.Name = "mnuThoatdangnhap";
             this.mnuThoatdangnhap.Size = new System.Drawing.Size(227, 28);
             this.mnuThoatdangnhap.Text = "Thoát đăng nhập";
+            this.mnuThoatdangnhap.Click += new System.EventHandler(this.mnuThoatdangnhap_Click);
             // 
             // toolStripSeparator2
             // 

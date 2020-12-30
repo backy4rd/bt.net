@@ -40,5 +40,17 @@ namespace ChuDe1_Nhom3 {
             doimk.Show();
         }
 
+        private void mnuThoatdangnhap_Click(object sender, EventArgs e) {
+            MyPublic.tenTaiKhoan = "";
+            MyPublic.quyenSD = "";
+            MyPublic.maTT = "";
+
+            mnuDulieu.Enabled = false;
+            mnuTienich.Enabled = false;
+            mnuDoimatkhau.Enabled = false;
+            mnuThoatdangnhap.Enabled = false;
+            mnuDangnhap.Enabled = true;
+        }
+
     }
 }
