@@ -9,50 +9,69 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ChuDe1_Nhom3 {
-    public partial class frmDoiMK : Form {
-        public frmDoiMK() {
+namespace ChuDe1_Nhom3
+{
+    public partial class frmDoiMK : Form
+    {
+        public frmDoiMK()
+        {
             InitializeComponent();
         }
 
-        private void frmDoiMK_Load(object sender, EventArgs e) {
+        private void frmDoiMK_Load(object sender, EventArgs e)
+        {
             doimkBtn.Enabled = false;
             mkcuTextBox.PasswordChar = '*';
             mkmoiTextBox.PasswordChar = '*';
             xacnhanTextBox.PasswordChar = '*';
         }
 
-        private void mkcuTextBox_TextChanged(object sender, EventArgs e) {
-            if (mkcuTextBox.Text == "" || mkmoiTextBox.Text == "" || xacnhanTextBox.Text == "") {
+        private void mkcuTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (mkcuTextBox.Text == "" || mkmoiTextBox.Text == "" || xacnhanTextBox.Text == "")
+            {
                 doimkBtn.Enabled = false;
-            } else {
+            }
+            else
+            {
                 doimkBtn.Enabled = true;
             }
         }
 
-        private void mkmoiTextBox_TextChanged(object sender, EventArgs e) {
-            if (mkcuTextBox.Text == "" || mkmoiTextBox.Text == "" || xacnhanTextBox.Text == "") {
+        private void mkmoiTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (mkcuTextBox.Text == "" || mkmoiTextBox.Text == "" || xacnhanTextBox.Text == "")
+            {
                 doimkBtn.Enabled = false;
-            } else {
+            }
+            else
+            {
                 doimkBtn.Enabled = true;
             }
         }
 
-        private void xacnhanTextBox_TextChanged(object sender, EventArgs e) {
-            if (mkcuTextBox.Text == "" || mkmoiTextBox.Text == "" || xacnhanTextBox.Text == "") {
+        private void xacnhanTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (mkcuTextBox.Text == "" || mkmoiTextBox.Text == "" || xacnhanTextBox.Text == "")
+            {
                 doimkBtn.Enabled = false;
-            } else {
+            }
+            else
+            {
                 doimkBtn.Enabled = true;
             }
         }
 
-        private void doimkBtn_Click(object sender, EventArgs e) {
-            if (mkmoiTextBox.Text != xacnhanTextBox.Text) {
+        private void doimkBtn_Click(object sender, EventArgs e)
+        {
+            if (mkmoiTextBox.Text != xacnhanTextBox.Text)
+            {
                 MessageBox.Show("Mật khẩu nhập lại không chính xác!", "Thông Báo", MessageBoxButtons.OK);
                 return;
             }
 
-            if (MyPublic.connection.State == ConnectionState.Closed) {
+            if (MyPublic.connection.State == ConnectionState.Closed)
+            {
                 MyPublic.connection.Open();
             }
 
@@ -63,7 +82,8 @@ namespace ChuDe1_Nhom3 {
 
             SqlDataReader reader = command.ExecuteReader();
 
-            if (!reader.HasRows) {
+            if (!reader.HasRows)
+            {
                 MessageBox.Show("Mật khẩu cũ không chính xác!", "Thông Báo", MessageBoxButtons.OK);
                 reader.Close();
                 return;
@@ -80,13 +100,16 @@ namespace ChuDe1_Nhom3 {
             this.Close();
         }
 
-        private void xacnhanTextBox_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
+        private void xacnhanTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
                 doimkBtn.PerformClick();
             }
         }
 
-        private void dongBtn_Click(object sender, EventArgs e) {
+        private void dongBtn_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

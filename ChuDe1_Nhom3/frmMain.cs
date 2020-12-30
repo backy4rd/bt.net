@@ -8,13 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ChuDe1_Nhom3 {
-    public partial class frmMain : Form {
-        public frmMain() {
+namespace ChuDe1_Nhom3
+{
+    public partial class frmMain : Form
+    {
+        public frmMain()
+        {
             InitializeComponent();
         }
 
-        private void frmMain_Load(object sender, EventArgs e) {
+        private void frmMain_Load(object sender, EventArgs e)
+        {
             MyPublic.createConnection();
             mnuDulieu.Enabled = false;
             mnuTienich.Enabled = false;
@@ -22,25 +26,30 @@ namespace ChuDe1_Nhom3 {
             mnuThoatdangnhap.Enabled = false;
         }
 
-        private void mnuThoat_Click(object sender, EventArgs e) {
+        private void mnuThoat_Click(object sender, EventArgs e)
+        {
             Application.Exit();
         }
 
-        private void mnuGioithieu_Click(object sender, EventArgs e) {
+        private void mnuGioithieu_Click(object sender, EventArgs e)
+        {
             MessageBox.Show("Đây là ứng dụng giúp quản lý bài thi", "Giới thiệu");
         }
 
-        private void mnuDangnhap_Click(object sender, EventArgs e) {
+        private void mnuDangnhap_Click(object sender, EventArgs e)
+        {
             frmDangNhap dangnhap = new frmDangNhap(this);
             dangnhap.Show();
         }
 
-        private void mnuDoimatkhau_Click(object sender, EventArgs e) {
+        private void mnuDoimatkhau_Click(object sender, EventArgs e)
+        {
             frmDoiMK doimk = new frmDoiMK();
             doimk.Show();
         }
 
-        private void mnuThoatdangnhap_Click(object sender, EventArgs e) {
+        private void mnuThoatdangnhap_Click(object sender, EventArgs e)
+        {
             MyPublic.tenTaiKhoan = "";
             MyPublic.quyenSD = "";
             MyPublic.maTT = "";
@@ -52,7 +61,8 @@ namespace ChuDe1_Nhom3 {
             mnuDangnhap.Enabled = true;
         }
 
-        private void frmMain_Shown(object sender, EventArgs e) {
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
             frmDangNhap dangnhap = new frmDangNhap();
             dangnhap.Show();
         }

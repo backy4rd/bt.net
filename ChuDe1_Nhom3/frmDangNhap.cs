@@ -9,44 +9,59 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ChuDe1_Nhom3 {
-    public partial class frmDangNhap : Form {
+namespace ChuDe1_Nhom3
+{
+    public partial class frmDangNhap : Form
+    {
         private frmMain main;
 
-        public frmDangNhap() {
+        public frmDangNhap()
+        {
             InitializeComponent();
         }
 
-        public frmDangNhap(frmMain main) {
+        public frmDangNhap(frmMain main)
+        {
             InitializeComponent();
             this.main = main;
         }
 
-        private void frmDangNhap_Load(object sender, EventArgs e) {
+        private void frmDangNhap_Load(object sender, EventArgs e)
+        {
             dangnhapBtn.Enabled = false;
             matkhauTextBox.PasswordChar = '*';
             taikhoanTextBox.Select();
         }
 
-        private void taikhoanTextBox_TextChanged(object sender, EventArgs e) {
-            if (taikhoanTextBox.Text == "" || matkhauTextBox.Text == "") {
+        private void taikhoanTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (taikhoanTextBox.Text == "" || matkhauTextBox.Text == "")
+            {
                 dangnhapBtn.Enabled = false;
-            } else {
+            }
+            else
+            {
                 dangnhapBtn.Enabled = true;
 
             }
         }
 
-        private void matkhauTextBox_TextChanged(object sender, EventArgs e) {
-            if (taikhoanTextBox.Text == "" || matkhauTextBox.Text == "") {
+        private void matkhauTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (taikhoanTextBox.Text == "" || matkhauTextBox.Text == "")
+            {
                 dangnhapBtn.Enabled = false;
-            } else {
+            }
+            else
+            {
                 dangnhapBtn.Enabled = true;
             }
         }
 
-        private void dangnhapBtn_Click(object sender, EventArgs e) {
-            if (MyPublic.connection.State == ConnectionState.Closed) {
+        private void dangnhapBtn_Click(object sender, EventArgs e)
+        {
+            if (MyPublic.connection.State == ConnectionState.Closed)
+            {
                 MyPublic.connection.Open();
             }
             string query = "SELECT TenTaiKhoan, QuyenSD, MaTT FROM NguoiSuDung WHERE TenTaiKhoan = @TAIKHOAN AND MatKhau = @MATKHAU";
@@ -57,7 +72,8 @@ namespace ChuDe1_Nhom3 {
             SqlDataReader reader = command.ExecuteReader();
 
             // handle login fail
-            if (!reader.HasRows) {
+            if (!reader.HasRows)
+            {
                 MessageBox.Show("Tên tài khoản hoặc mật khẩu không chính xác!", "Thông Báo", MessageBoxButtons.OK);
                 reader.Close();
                 return;
@@ -80,12 +96,15 @@ namespace ChuDe1_Nhom3 {
             this.Close();
         }
 
-        private void dongBtn_Click(object sender, EventArgs e) {
+        private void dongBtn_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
 
-        private void matkhauTextBox_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
+        private void matkhauTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
                 dangnhapBtn.PerformClick();
             }
         }
