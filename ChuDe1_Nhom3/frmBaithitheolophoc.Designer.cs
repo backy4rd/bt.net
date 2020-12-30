@@ -59,7 +59,7 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(154, 50);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(554, 31);
+            this.comboBox2.Size = new System.Drawing.Size(531, 31);
             this.comboBox2.TabIndex = 107;
             // 
             // dtpNgaythi
@@ -288,6 +288,7 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label5);
             this.Name = "frmBaithitheolophoc";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmBaithitheolophoc";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

@@ -52,5 +52,51 @@ namespace ChuDe1_Nhom3 {
             mnuDangnhap.Enabled = true;
         }
 
+        private void frmMain_Shown(object sender, EventArgs e) {
+            frmDangNhap dangnhap = new frmDangNhap();
+            dangnhap.Show();
+        }
+
+        private void mnuTaikhoan_Click(object sender, EventArgs e)
+        {
+            frmTaikhoan taikhoan = new frmTaikhoan();
+            taikhoan.Show();
+        }
+
+        private void mnuLop_Click(object sender, EventArgs e)
+        {
+            frmLop lop = new frmLop();
+            lop.Show();
+        }
+
+        private void mnuMon_Click(object sender, EventArgs e)
+        {
+            frmMon mon = new frmMon();
+            mon.Show();
+        }
+
+        private void mnuBaithi_Click(object sender, EventArgs e)
+        {
+            frmBaithi baithi = new frmBaithi();
+            baithi.Show();
+        }
+
+        private void mnuTrungtam_Click(object sender, EventArgs e)
+        {
+            frmTrungtam trungtam = new frmTrungtam();
+            trungtam.Show();
+        }
+
+        private void mnuBaithitheomon_Click(object sender, EventArgs e)
+        {
+            frmBaithitheomon baithitheomon = new frmBaithitheomon();
+            baithitheomon.Show();
+        }
+
+        private void mnuBaithitheolop_Click(object sender, EventArgs e)
+        {
+            frmBaithitheolophoc baithitheolop = new frmBaithitheolophoc();
+            baithitheolop.Show();
+        }
     }
 }

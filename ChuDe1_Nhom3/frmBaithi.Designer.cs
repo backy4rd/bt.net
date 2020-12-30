@@ -310,6 +310,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
             this.Name = "frmBaithi";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Theo dõi bài thi";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

@@ -288,6 +288,7 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label5);
             this.Name = "frmBaithitheomon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmBaithitheomon";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

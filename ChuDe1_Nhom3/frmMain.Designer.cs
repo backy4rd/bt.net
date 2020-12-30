@@ -80,30 +80,35 @@
             this.mnuTaikhoan.Name = "mnuTaikhoan";
             this.mnuTaikhoan.Size = new System.Drawing.Size(271, 28);
             this.mnuTaikhoan.Text = "Tài khoản người dùng";
+            this.mnuTaikhoan.Click += new System.EventHandler(this.mnuTaikhoan_Click);
             // 
             // mnuLop
             // 
             this.mnuLop.Name = "mnuLop";
             this.mnuLop.Size = new System.Drawing.Size(271, 28);
             this.mnuLop.Text = "Lớp học";
+            this.mnuLop.Click += new System.EventHandler(this.mnuLop_Click);
             // 
             // mnuMon
             // 
             this.mnuMon.Name = "mnuMon";
             this.mnuMon.Size = new System.Drawing.Size(271, 28);
             this.mnuMon.Text = "Môn học";
+            this.mnuMon.Click += new System.EventHandler(this.mnuMon_Click);
             // 
             // mnuBaithi
             // 
             this.mnuBaithi.Name = "mnuBaithi";
             this.mnuBaithi.Size = new System.Drawing.Size(271, 28);
             this.mnuBaithi.Text = "Theo dõi bài thi";
+            this.mnuBaithi.Click += new System.EventHandler(this.mnuBaithi_Click);
             // 
             // mnuTrungtam
             // 
             this.mnuTrungtam.Name = "mnuTrungtam";
             this.mnuTrungtam.Size = new System.Drawing.Size(271, 28);
             this.mnuTrungtam.Text = "Trung tâm";
+            this.mnuTrungtam.Click += new System.EventHandler(this.mnuTrungtam_Click);
             // 
             // mnuTienich
             // 
@@ -120,12 +125,14 @@
             this.mnuBaithitheomon.Name = "mnuBaithitheomon";
             this.mnuBaithitheomon.Size = new System.Drawing.Size(338, 28);
             this.mnuBaithitheomon.Text = "Theo dõi bài thi theo môn học";
+            this.mnuBaithitheomon.Click += new System.EventHandler(this.mnuBaithitheomon_Click);
             // 
             // mnuBaithitheolop
             // 
             this.mnuBaithitheolop.Name = "mnuBaithitheolop";
             this.mnuBaithitheolop.Size = new System.Drawing.Size(338, 28);
             this.mnuBaithitheolop.Text = "Theo dõi bài thi theo lớp học";
+            this.mnuBaithitheolop.Click += new System.EventHandler(this.mnuBaithitheolop_Click);
             // 
             // mnuTuychon
             // 
@@ -146,7 +153,7 @@
             this.mnuDangnhap.Name = "mnuDangnhap";
             this.mnuDangnhap.Size = new System.Drawing.Size(227, 28);
             this.mnuDangnhap.Text = "Đăng nhập";
-            this.mnuDangnhap.Click += new System.EventHandler(this.mnuDangnhap_Click);
+            this.mnuDangnhap.Click += new System.EventHandler(this.frmMain_Shown);
             // 
             // mnuDoimatkhau
             // 
@@ -194,6 +201,7 @@
             this.Text = "Quản lý bài thi";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

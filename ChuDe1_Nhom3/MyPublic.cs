@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ChuDe1_Nhom3 {
     class MyPublic {
         public static SqlConnection connection;
-        public static string connectionString = "Server=localhost; Database=QL_BaiThi; User Id=TN207User; Password=TN207User";
+        public static string connectionString = "Server = localhost; Database = QL_BaiThi; Integrated Security = false; UID = TN207User; PWD = TN207User";
         public static string tenTaiKhoan, quyenSD, maTT;
 
         public static void createConnection() {
@@ -66,4 +66,3 @@ namespace ChuDe1_Nhom3 {
         }
     }
 }
-//may dong code di
