@@ -60,8 +60,11 @@ namespace ChuDe1_Nhom3
 
             dsTKGridView.DataSource = dataSet.Tables["NguoiSuDung"];
             dsTKGridView.Columns[0].Width = 125;
+            dsTKGridView.Columns[0].HeaderText = "Tên tài khoản";
             dsTKGridView.Columns[1].Width = 125;
+            dsTKGridView.Columns[1].HeaderText = "Quyền sử dụng";
             dsTKGridView.Columns[2].Width = 125;
+            dsTKGridView.Columns[2].HeaderText = "Mã trung tâm";
 
             // highlight cac button
             if (MyPublic.quyenSD == "AdTinh")
