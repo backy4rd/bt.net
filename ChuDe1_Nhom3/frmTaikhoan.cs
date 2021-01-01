@@ -193,7 +193,7 @@ namespace ChuDe1_Nhom3
         {
             int currentRow = dsTKGridView.CurrentRow.Index;
 
-            DialogResult dialog = MessageBox.Show("Bạn có thực sự muốn xóa tài khoản này!", "Thông báo", MessageBoxButtons.YesNo);
+            DialogResult dialog = MessageBox.Show("Bạn có thực sự muốn xóa tài khoản này không!", "Thông báo", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.No) return;
 
             if (MyPublic.connection.State == ConnectionState.Closed)
