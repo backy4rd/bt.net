@@ -67,6 +67,7 @@ namespace ChuDe1_Nhom3
             dsTKGridView.Columns[2].HeaderText = "Mã trung tâm";
 
             // highlight cac button
+
             if (MyPublic.quyenSD == "AdTinh")
             {
                 themBtn.Enabled = true;
@@ -79,9 +80,13 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = false;
                 xoaBtn.Enabled = false;
             }
+            dsTKGridView.Enabled = true;
+            tenTKTextBox.Enabled = false;
+            maTTCBBox.Enabled = false;
+            quyenSDCBBox.Enabled = false;
+
             luuBtn.Enabled = false;
             khongluuBtn.Enabled = false;
-            toggleEdit(false);
 
             // select tai khoan dau tien
             displayRowAt(0);
@@ -100,13 +105,6 @@ namespace ChuDe1_Nhom3
             maTTCBBox.SelectedValue = "";
             tenTKTextBox.Select();
 
-            themBtn.Enabled = false;
-            suaBtn.Enabled = false;
-            xoaBtn.Enabled = false;
-            dsTKGridView.Enabled = false;
-
-            luuBtn.Enabled = true;
-            khongluuBtn.Enabled = true;
             toggleEdit(true);
         }
 
@@ -114,13 +112,6 @@ namespace ChuDe1_Nhom3
         {
             action = "sua";
 
-            themBtn.Enabled = false;
-            suaBtn.Enabled = false;
-            xoaBtn.Enabled = false;
-            dsTKGridView.Enabled = false;
-
-            luuBtn.Enabled = true;
-            khongluuBtn.Enabled = true;
             toggleEdit(true);
         }
 
@@ -184,23 +175,11 @@ namespace ChuDe1_Nhom3
 
             command.ExecuteNonQuery();
 
-            dsTKGridView.Enabled = true;
-            themBtn.Enabled = true;
-            suaBtn.Enabled = true;
-            xoaBtn.Enabled = true;
-            luuBtn.Enabled = false;
-            khongluuBtn.Enabled = false;
             toggleEdit(false);
         }
 
         private void khongluuBtn_Click(object sender, EventArgs e)
         {
-            dsTKGridView.Enabled = true;
-            themBtn.Enabled = true;
-            suaBtn.Enabled = true;
-            xoaBtn.Enabled = true;
-            luuBtn.Enabled = false;
-            khongluuBtn.Enabled = false;
             displayRowAt(dsTKGridView.CurrentRow.Index);
             toggleEdit(false);
         }
@@ -264,16 +243,33 @@ namespace ChuDe1_Nhom3
         {
             if (flag)
             {
+                dsTKGridView.Enabled = false;
+
+                themBtn.Enabled = false;
+                suaBtn.Enabled = false;
+                xoaBtn.Enabled = false;
+
                 tenTKTextBox.Enabled = true;
                 maTTCBBox.Enabled = true;
                 quyenSDCBBox.Enabled = true;
+
+                luuBtn.Enabled = true;
+                khongluuBtn.Enabled = true;
             }
             else
             {
+                dsTKGridView.Enabled = true;
+
+                themBtn.Enabled = true;
+                suaBtn.Enabled = true;
+                xoaBtn.Enabled = true;
 
                 tenTKTextBox.Enabled = false;
                 maTTCBBox.Enabled = false;
                 quyenSDCBBox.Enabled = false;
+
+                luuBtn.Enabled = false;
+                khongluuBtn.Enabled = false;
             }
         }
     }

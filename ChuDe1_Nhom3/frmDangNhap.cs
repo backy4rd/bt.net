@@ -30,8 +30,6 @@ namespace ChuDe1_Nhom3
         {
             dangnhapBtn.Enabled = false;
             matkhauTextBox.PasswordChar = '*';
-            matkhauTextBox.Text = "hoho";
-            taikhoanTextBox.Text = "hoho";
             taikhoanTextBox.Select();
         }
 
