@@ -24,6 +24,8 @@ namespace ChuDe1_Nhom3
         private void frmTaikhoan_Load(object sender, EventArgs e)
         {
             dsTKGridView.AllowUserToAddRows = false;
+            dsTKGridView.AllowUserToDeleteRows = false;
+            tenTKTextBox.MaxLength = 20;
 
             // set data cho combobox
             DataTable table = new DataTable();
@@ -35,8 +37,6 @@ namespace ChuDe1_Nhom3
             quyenSDCBBox.DataSource = table;
             quyenSDCBBox.DisplayMember = "QuyenSD";
             quyenSDCBBox.ValueMember = "QuyenSD";
-
-            quyenSDCBBox.SelectedValue = "";
 
             // set data cho data ma tt combobox
             if (MyPublic.connection.State == ConnectionState.Closed)
@@ -67,7 +67,6 @@ namespace ChuDe1_Nhom3
             dsTKGridView.Columns[2].HeaderText = "Mã trung tâm";
 
             // highlight cac button
-
             if (MyPublic.quyenSD == "AdTinh")
             {
                 themBtn.Enabled = true;
@@ -103,9 +102,10 @@ namespace ChuDe1_Nhom3
             tenTKTextBox.Text = "";
             quyenSDCBBox.SelectedValue = "";
             maTTCBBox.SelectedValue = "";
-            tenTKTextBox.Select();
 
             toggleEdit(true);
+
+            tenTKTextBox.Select();
         }
 
         private void suaBtn_Click(object sender, EventArgs e)
@@ -155,7 +155,7 @@ namespace ChuDe1_Nhom3
                 command.Parameters.AddWithValue("@TAIKHOAN", tenTKTextBox.Text);
                 command.Parameters.AddWithValue("@QUYENSD", quyenSDCBBox.SelectedValue);
                 command.Parameters.AddWithValue("@MATT", maTTCBBox.SelectedValue);
-                command.Parameters.AddWithValue("@MATKHAU", showPrompt()); ;
+                command.Parameters.AddWithValue("@MATKHAU", showRequirePasswordPrompt()); ;
 
                 dsNguoiSD.Rows.Add(tenTKTextBox.Text, quyenSDCBBox.SelectedValue, maTTCBBox.SelectedValue);
             }
@@ -208,7 +208,7 @@ namespace ChuDe1_Nhom3
             dsNguoiSD.Rows.RemoveAt(currentRow);
         }
 
-        private string showPrompt()
+        private string showRequirePasswordPrompt()
         {
             Form prompt = new Form()
             {
@@ -219,7 +219,7 @@ namespace ChuDe1_Nhom3
                 StartPosition = FormStartPosition.CenterScreen,
             };
             Label textLabel = new Label() { Left = 50, Top = 20, Text = "Vui lòng nhập mật khẩu" };
-            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 180, PasswordChar = '*' };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 180, PasswordChar = '*', MaxLength = 20 };
             Button confirmation = new Button() { Text = "Ok", Left = 160, Width = 100, Top = 78, DialogResult = DialogResult.OK };
             textBox.Select();
             confirmation.Click += (sender, e) => { prompt.Close(); };
