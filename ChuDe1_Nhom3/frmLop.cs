@@ -112,7 +112,7 @@ namespace ChuDe1_Nhom3
 
             dgvLophoc.DataSource = lop;
             dgvLophoc.DataMember = "LopHoc";
-            dgvLophoc.Width = 526;
+            dgvLophoc.Width = 525;
             dgvLophoc.AllowUserToAddRows = false;
             dgvLophoc.AllowUserToDeleteRows = false;
             dgvLophoc.Columns[0].Width = 100;
@@ -151,6 +151,7 @@ namespace ChuDe1_Nhom3
                 sql = "Update LopHoc Set TenLop = @TenLop, MaTT = @MaTT Where MaLop = @MaLop"; 
             if (MyPublic.connection.State == ConnectionState.Closed)
                 MyPublic.connection.Open();
+            int currentRow = dgvLophoc.CurrentRow.Index;
             SqlCommand command = new SqlCommand(sql, MyPublic.connection);
             command.Parameters.AddWithValue("@MaLop", txtMalop.Text);
             command.Parameters.AddWithValue("@TenLop", txtTenlop.Text);
@@ -198,8 +199,8 @@ namespace ChuDe1_Nhom3
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (MyPublic.tonTaiKhoaChinh(txtMalop.Text, "MaLop", "LopHoc"))
-                MessageBox.Show("Phải xóa bài thi của lớp trước !");
+            if (MyPublic.tonTaiKhoaChinh( "MaLop", txtMalop.Text, "TheoDoiBaiThi"))
+                MessageBox.Show("Phải xóa dữ liệu bài thi của lớp trước !");
             else
             {
                 DialogResult dongY;
