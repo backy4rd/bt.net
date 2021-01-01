@@ -14,7 +14,7 @@ namespace ChuDe1_Nhom3
     public partial class frmTaikhoan : Form
     {
         private string action;
-        private DataTable nguoiSD;
+        private DataTable dsNguoiSD;
 
         public frmTaikhoan()
         {
@@ -56,7 +56,7 @@ namespace ChuDe1_Nhom3
             query = "SELECT TenTaiKhoan, QuyenSD, MaTT FROM NguoiSuDung";
             dataSet = new DataSet();
             MyPublic.OpenData(query, dataSet, "NguoiSuDung");
-            nguoiSD = dataSet.Tables["NguoiSuDung"];
+            dsNguoiSD = dataSet.Tables["NguoiSuDung"];
 
             dsTKGridView.DataSource = dataSet.Tables["NguoiSuDung"];
             dsTKGridView.Columns[0].Width = 125;
@@ -81,6 +81,7 @@ namespace ChuDe1_Nhom3
             }
             luuBtn.Enabled = false;
             khongluuBtn.Enabled = false;
+            toggleEdit(false);
 
             // select tai khoan dau tien
             displayRowAt(0);
@@ -97,13 +98,16 @@ namespace ChuDe1_Nhom3
             tenTKTextBox.Text = "";
             quyenSDCBBox.SelectedValue = "";
             maTTCBBox.SelectedValue = "";
+            tenTKTextBox.Select();
 
             themBtn.Enabled = false;
             suaBtn.Enabled = false;
             xoaBtn.Enabled = false;
             dsTKGridView.Enabled = false;
+
             luuBtn.Enabled = true;
             khongluuBtn.Enabled = true;
+            toggleEdit(true);
         }
 
         private void suaBtn_Click(object sender, EventArgs e)
@@ -114,8 +118,10 @@ namespace ChuDe1_Nhom3
             suaBtn.Enabled = false;
             xoaBtn.Enabled = false;
             dsTKGridView.Enabled = false;
+
             luuBtn.Enabled = true;
             khongluuBtn.Enabled = true;
+            toggleEdit(true);
         }
 
 
@@ -136,6 +142,21 @@ namespace ChuDe1_Nhom3
             SqlCommand command;
             int currentRow = dsTKGridView.CurrentRow.Index;
 
+
+            if (MyPublic.tonTaiKhoaChinh("TenTaiKhoan", tenTKTextBox.Text, "NguoiSuDung"))
+            {
+                if (action == "them")
+                {
+                    MessageBox.Show("Tài khoản đã tồn tại!", "Thông báo", MessageBoxButtons.OK);
+                    return;
+                }
+                else if (tenTKTextBox.Text != dsNguoiSD.Rows[currentRow]["TenTaiKhoan"].ToString())
+                {
+                    MessageBox.Show("Tài khoản đã tồn tại!", "Thông báo", MessageBoxButtons.OK);
+                    return;
+                }
+            }
+
             if (action == "them")
             {
                 query = "INSERT INTO NguoiSuDung VALUES(@TAIKHOAN, @MATKHAU, @QUYENSD, @MATT)";
@@ -145,7 +166,7 @@ namespace ChuDe1_Nhom3
                 command.Parameters.AddWithValue("@MATT", maTTCBBox.SelectedValue);
                 command.Parameters.AddWithValue("@MATKHAU", showPrompt()); ;
 
-                nguoiSD.Rows.Add(tenTKTextBox.Text, quyenSDCBBox.SelectedValue, maTTCBBox.SelectedValue);
+                dsNguoiSD.Rows.Add(tenTKTextBox.Text, quyenSDCBBox.SelectedValue, maTTCBBox.SelectedValue);
             }
             else
             {
@@ -154,11 +175,11 @@ namespace ChuDe1_Nhom3
                 command.Parameters.AddWithValue("@TAIKHOAN", tenTKTextBox.Text);
                 command.Parameters.AddWithValue("@QUYENSD", quyenSDCBBox.SelectedValue);
                 command.Parameters.AddWithValue("@MATT", maTTCBBox.SelectedValue);
-                command.Parameters.AddWithValue("@TAIKHOANGOC", nguoiSD.Rows[currentRow]["TenTaiKhoan"]);
+                command.Parameters.AddWithValue("@TAIKHOANGOC", dsNguoiSD.Rows[currentRow]["TenTaiKhoan"]);
 
-                nguoiSD.Rows[currentRow]["TenTaiKhoan"] = tenTKTextBox.Text;
-                nguoiSD.Rows[currentRow]["QuyenSD"] = quyenSDCBBox.SelectedValue;
-                nguoiSD.Rows[currentRow]["MaTT"] = maTTCBBox.SelectedValue;
+                dsNguoiSD.Rows[currentRow]["TenTaiKhoan"] = tenTKTextBox.Text;
+                dsNguoiSD.Rows[currentRow]["QuyenSD"] = quyenSDCBBox.SelectedValue;
+                dsNguoiSD.Rows[currentRow]["MaTT"] = maTTCBBox.SelectedValue;
             }
 
             command.ExecuteNonQuery();
@@ -169,6 +190,7 @@ namespace ChuDe1_Nhom3
             xoaBtn.Enabled = true;
             luuBtn.Enabled = false;
             khongluuBtn.Enabled = false;
+            toggleEdit(false);
         }
 
         private void khongluuBtn_Click(object sender, EventArgs e)
@@ -180,36 +202,7 @@ namespace ChuDe1_Nhom3
             luuBtn.Enabled = false;
             khongluuBtn.Enabled = false;
             displayRowAt(dsTKGridView.CurrentRow.Index);
-        }
-
-        private string showPrompt()
-        {
-            Form prompt = new Form()
-            {
-                Width = 300,
-                Height = 150,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = "Nhập mật khẩu",
-                StartPosition = FormStartPosition.CenterScreen,
-            };
-            Label textLabel = new Label() { Left = 50, Top = 20, Text = "Mật khẩu" };
-            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 180, PasswordChar = '*' };
-            Button confirmation = new Button() { Text = "Ok", Left = 160, Width = 100, Top = 78, DialogResult = DialogResult.OK };
-            confirmation.Click += (sender, e) => { prompt.Close(); };
-            prompt.Controls.Add(textBox);
-            prompt.Controls.Add(confirmation);
-            prompt.Controls.Add(textLabel);
-            prompt.AcceptButton = confirmation;
-
-            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
-        }
-
-        private void displayRowAt(int index)
-        {
-            DataGridViewRow row = dsTKGridView.Rows[index];
-            tenTKTextBox.Text = row.Cells["TenTaiKhoan"].Value.ToString();
-            quyenSDCBBox.SelectedValue = row.Cells["QuyenSD"].Value.ToString();
-            maTTCBBox.SelectedValue = row.Cells["MaTT"].Value.ToString();
+            toggleEdit(false);
         }
 
         private void dongBtn_Click(object sender, EventArgs e)
@@ -230,10 +223,58 @@ namespace ChuDe1_Nhom3
             }
             string query = "DELETE FROM NguoiSuDung WHERE TenTaiKhoan=@TAIKHOAN";
             SqlCommand command = new SqlCommand(query, MyPublic.connection);
-            command.Parameters.AddWithValue("@TAIKHOAN", nguoiSD.Rows[currentRow][0]);
+            command.Parameters.AddWithValue("@TAIKHOAN", dsNguoiSD.Rows[currentRow][0]);
 
             command.ExecuteNonQuery();
-            nguoiSD.Rows.RemoveAt(currentRow);
+            dsNguoiSD.Rows.RemoveAt(currentRow);
+        }
+
+        private string showPrompt()
+        {
+            Form prompt = new Form()
+            {
+                Width = 300,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = "Yêu cầu",
+                StartPosition = FormStartPosition.CenterScreen,
+            };
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = "Vui lòng nhập mật khẩu" };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 180, PasswordChar = '*' };
+            Button confirmation = new Button() { Text = "Ok", Left = 160, Width = 100, Top = 78, DialogResult = DialogResult.OK };
+            textBox.Select();
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+        }
+
+        private void displayRowAt(int index)
+        {
+            DataGridViewRow row = dsTKGridView.Rows[index];
+            tenTKTextBox.Text = row.Cells["TenTaiKhoan"].Value.ToString();
+            quyenSDCBBox.SelectedValue = row.Cells["QuyenSD"].Value.ToString();
+            maTTCBBox.SelectedValue = row.Cells["MaTT"].Value.ToString();
+        }
+
+        private void toggleEdit(bool flag)
+        {
+            if (flag)
+            {
+                tenTKTextBox.Enabled = true;
+                maTTCBBox.Enabled = true;
+                quyenSDCBBox.Enabled = true;
+            }
+            else
+            {
+
+                tenTKTextBox.Enabled = false;
+                maTTCBBox.Enabled = false;
+                quyenSDCBBox.Enabled = false;
+            }
         }
     }
 }
