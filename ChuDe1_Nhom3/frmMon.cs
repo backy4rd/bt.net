@@ -78,6 +78,7 @@ namespace ChuDe1_Nhom3
             tinchiTextBox.Clear();
 
             toggleEdit(true);
+            mamonTextBox.Enabled = true;
 
             mamonTextBox.Select();
         }
@@ -138,18 +139,11 @@ namespace ChuDe1_Nhom3
             int currentRow = dsMHGridView.CurrentRow.Index;
 
 
-            if (MyPublic.tonTaiKhoaChinh("MaMon", mamonTextBox.Text, "MonHoc"))
+            if (MyPublic.tonTaiKhoaChinh("MaMon", mamonTextBox.Text, "MonHoc") && action == "them")
             {
-                if (action == "them")
-                {
-                    MessageBox.Show("Môn học đã tồn tại!", "Thông báo", MessageBoxButtons.OK);
-                    return;
-                }
-                else if (mamonTextBox.Text != dsMonHoc.Rows[currentRow]["MaMon"].ToString())
-                {
-                    MessageBox.Show("Môn học đã tồn tại!", "Thông báo", MessageBoxButtons.OK);
-                    return;
-                }
+
+                MessageBox.Show("Môn học đã tồn tại!", "Thông báo", MessageBoxButtons.OK);
+                return;
             }
 
             if (action == "them")
@@ -164,12 +158,11 @@ namespace ChuDe1_Nhom3
             }
             else
             {
-                query = "UPDATE MonHoc SET MaMon=@MAMON, TenMon=@TENMON, SoTinChi=@SOTINCHI WHERE MaMon=@MAMONGOC";
+                query = "UPDATE MonHoc SET TenMon=@TENMON, SoTinChi=@SOTINCHI WHERE MaMon=@MAMON";
                 command = new SqlCommand(query, MyPublic.connection);
-                command.Parameters.AddWithValue("@MAMON", mamonTextBox.Text);
                 command.Parameters.AddWithValue("@TENMON", tenmonTextBox.Text);
                 command.Parameters.AddWithValue("@SOTINCHI", sotinchi);
-                command.Parameters.AddWithValue("@MAMONGOC", dsMonHoc.Rows[currentRow]["MaMon"]);
+                command.Parameters.AddWithValue("@MAMON", mamonTextBox.Text);
 
                 dsMonHoc.Rows[currentRow]["MaMon"] = mamonTextBox.Text;
                 dsMonHoc.Rows[currentRow]["TenMon"] = tenmonTextBox.Text;
@@ -179,12 +172,20 @@ namespace ChuDe1_Nhom3
             command.ExecuteNonQuery();
 
             toggleEdit(false);
+            if (action == "them")
+            {
+                mamonTextBox.Enabled = false;
+            }
         }
 
         private void khongluuBtn_Click(object sender, EventArgs e)
         {
             displayRowAt(dsMHGridView.CurrentRow.Index);
             toggleEdit(false);
+            if (action == "them")
+            {
+                mamonTextBox.Enabled = false;
+            }
         }
 
         private void dongBtn_Click(object sender, EventArgs e)
@@ -210,7 +211,6 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = false;
                 xoaBtn.Enabled = false;
 
-                mamonTextBox.Enabled = true;
                 tenmonTextBox.Enabled = true;
                 tinchiTextBox.Enabled = true;
 
@@ -225,7 +225,6 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = true;
                 xoaBtn.Enabled = true;
 
-                mamonTextBox.Enabled = false;
                 tenmonTextBox.Enabled = false;
                 tinchiTextBox.Enabled = false;
 

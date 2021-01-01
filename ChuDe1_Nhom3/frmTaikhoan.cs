@@ -104,6 +104,7 @@ namespace ChuDe1_Nhom3
             maTTCBBox.SelectedValue = "";
 
             toggleEdit(true);
+            tenTKTextBox.Enabled = true;
 
             tenTKTextBox.Select();
         }
@@ -134,18 +135,10 @@ namespace ChuDe1_Nhom3
             int currentRow = dsTKGridView.CurrentRow.Index;
 
 
-            if (MyPublic.tonTaiKhoaChinh("TenTaiKhoan", tenTKTextBox.Text, "NguoiSuDung"))
+            if (MyPublic.tonTaiKhoaChinh("TenTaiKhoan", tenTKTextBox.Text, "NguoiSuDung") && action == "them")
             {
-                if (action == "them")
-                {
-                    MessageBox.Show("Tài khoản đã tồn tại!", "Thông báo", MessageBoxButtons.OK);
-                    return;
-                }
-                else if (tenTKTextBox.Text != dsNguoiSD.Rows[currentRow]["TenTaiKhoan"].ToString())
-                {
-                    MessageBox.Show("Tài khoản đã tồn tại!", "Thông báo", MessageBoxButtons.OK);
-                    return;
-                }
+                MessageBox.Show("Tài khoản đã tồn tại!", "Thông báo", MessageBoxButtons.OK);
+                return;
             }
 
             if (action == "them")
@@ -158,15 +151,15 @@ namespace ChuDe1_Nhom3
                 command.Parameters.AddWithValue("@MATKHAU", showRequirePasswordPrompt()); ;
 
                 dsNguoiSD.Rows.Add(tenTKTextBox.Text, quyenSDCBBox.SelectedValue, maTTCBBox.SelectedValue);
+
             }
             else
             {
-                query = "UPDATE NguoiSuDung SET TenTaiKhoan=@TAIKHOAN, QuyenSD=@QUYENSD, MaTT=@MATT WHERE TenTaiKhoan=@TAIKHOANGOC";
+                query = "UPDATE NguoiSuDung SET QuyenSD=@QUYENSD, MaTT=@MATT WHERE TenTaiKhoan=@TAIKHOAN";
                 command = new SqlCommand(query, MyPublic.connection);
-                command.Parameters.AddWithValue("@TAIKHOAN", tenTKTextBox.Text);
                 command.Parameters.AddWithValue("@QUYENSD", quyenSDCBBox.SelectedValue);
                 command.Parameters.AddWithValue("@MATT", maTTCBBox.SelectedValue);
-                command.Parameters.AddWithValue("@TAIKHOANGOC", dsNguoiSD.Rows[currentRow]["TenTaiKhoan"]);
+                command.Parameters.AddWithValue("@TAIKHOAN", tenTKTextBox.Text);
 
                 dsNguoiSD.Rows[currentRow]["TenTaiKhoan"] = tenTKTextBox.Text;
                 dsNguoiSD.Rows[currentRow]["QuyenSD"] = quyenSDCBBox.SelectedValue;
@@ -176,12 +169,20 @@ namespace ChuDe1_Nhom3
             command.ExecuteNonQuery();
 
             toggleEdit(false);
+            if (action == "them")
+            {
+                tenTKTextBox.Enabled = false;
+            }
         }
 
         private void khongluuBtn_Click(object sender, EventArgs e)
         {
             displayRowAt(dsTKGridView.CurrentRow.Index);
             toggleEdit(false);
+            if (action == "them")
+            {
+                tenTKTextBox.Enabled = false;
+            }
         }
 
         private void dongBtn_Click(object sender, EventArgs e)
@@ -249,7 +250,6 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = false;
                 xoaBtn.Enabled = false;
 
-                tenTKTextBox.Enabled = true;
                 maTTCBBox.Enabled = true;
                 quyenSDCBBox.Enabled = true;
 
@@ -264,7 +264,6 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = true;
                 xoaBtn.Enabled = true;
 
-                tenTKTextBox.Enabled = false;
                 maTTCBBox.Enabled = false;
                 quyenSDCBBox.Enabled = false;
 
