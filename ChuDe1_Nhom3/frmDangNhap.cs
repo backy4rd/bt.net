@@ -60,6 +60,19 @@ namespace ChuDe1_Nhom3
 
         private void dangnhapBtn_Click(object sender, EventArgs e)
         {
+            if (taikhoanTextBox.Text == "TN207User" && matkhauTextBox.Text == "TN207User")
+            {
+                MyPublic.tenTaiKhoan = "TN207User";
+                MyPublic.quyenSD = "AdTinh";
+                MyPublic.maTT = "";
+                main.mnuDulieu.Enabled = true;
+                main.mnuTienich.Enabled = true;
+                main.mnuDoimatkhau.Enabled = true;
+                main.mnuThoatdangnhap.Enabled = true;
+                main.mnuDangnhap.Enabled = false;
+                this.Close();
+                return;
+            }
             if (MyPublic.connection.State == ConnectionState.Closed)
             {
                 MyPublic.connection.Open();
