@@ -104,7 +104,6 @@ namespace ChuDe1_Nhom3
             maTTCBBox.SelectedValue = "";
 
             toggleEdit(true);
-            tenTKTextBox.Enabled = true;
 
             tenTKTextBox.Select();
         }
@@ -169,20 +168,12 @@ namespace ChuDe1_Nhom3
             command.ExecuteNonQuery();
 
             toggleEdit(false);
-            if (action == "them")
-            {
-                tenTKTextBox.Enabled = false;
-            }
         }
 
         private void khongluuBtn_Click(object sender, EventArgs e)
         {
             displayRowAt(dsTKGridView.CurrentRow.Index);
             toggleEdit(false);
-            if (action == "them")
-            {
-                tenTKTextBox.Enabled = false;
-            }
         }
 
         private void dongBtn_Click(object sender, EventArgs e)
@@ -194,7 +185,7 @@ namespace ChuDe1_Nhom3
         {
             int currentRow = dsTKGridView.CurrentRow.Index;
 
-            DialogResult dialog = MessageBox.Show("Bạn có thực sự muốn xóa tài khoản này không!", "Thông báo", MessageBoxButtons.YesNo);
+            DialogResult dialog = MessageBox.Show("Bạn có thực sự muốn xóa tài khoản này không?", "Thông báo", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.No) return;
 
             if (MyPublic.connection.State == ConnectionState.Closed)
@@ -250,6 +241,7 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = false;
                 xoaBtn.Enabled = false;
 
+                if (action == "them") tenTKTextBox.Enabled = true;
                 maTTCBBox.Enabled = true;
                 quyenSDCBBox.Enabled = true;
 
@@ -264,6 +256,7 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = true;
                 xoaBtn.Enabled = true;
 
+                if (action == "them") tenTKTextBox.Enabled = false;
                 maTTCBBox.Enabled = false;
                 quyenSDCBBox.Enabled = false;
 

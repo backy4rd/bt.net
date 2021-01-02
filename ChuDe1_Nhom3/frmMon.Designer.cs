@@ -99,7 +99,7 @@
             this.tinchiTextBox.Location = new System.Drawing.Point(148, 150);
             this.tinchiTextBox.Name = "tinchiTextBox";
             this.tinchiTextBox.Size = new System.Drawing.Size(377, 30);
-            this.tinchiTextBox.TabIndex = 5;
+            this.tinchiTextBox.TabIndex = 6;
             // 
             // tenmonTextBox
             // 
@@ -107,7 +107,7 @@
             this.tenmonTextBox.Location = new System.Drawing.Point(148, 104);
             this.tenmonTextBox.Name = "tenmonTextBox";
             this.tenmonTextBox.Size = new System.Drawing.Size(377, 30);
-            this.tenmonTextBox.TabIndex = 6;
+            this.tenmonTextBox.TabIndex = 5;
             // 
             // themBtn
             // 

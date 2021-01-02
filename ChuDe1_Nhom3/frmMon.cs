@@ -78,7 +78,6 @@ namespace ChuDe1_Nhom3
             tinchiTextBox.Clear();
 
             toggleEdit(true);
-            mamonTextBox.Enabled = true;
 
             mamonTextBox.Select();
         }
@@ -94,20 +93,21 @@ namespace ChuDe1_Nhom3
         {
             int currentRow = dsMHGridView.CurrentRow.Index;
 
-            DialogResult dialog = MessageBox.Show("Việc xóa môn học có thể xóa các bài thi có liên quan, bạn có thực sự muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo);
+            DialogResult dialog = MessageBox.Show("Bạn có thực sự muốn xóa môn học này không?", "Thông báo", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.No) return;
 
             if (MyPublic.connection.State == ConnectionState.Closed)
             {
                 MyPublic.connection.Open();
             }
-            string query = "DELETE FROM TheoDoiBaiThi WHERE MaMon=@MAMON";
-            SqlCommand command = new SqlCommand(query, MyPublic.connection);
-            command.Parameters.AddWithValue("@MAMON", dsMonHoc.Rows[currentRow]["MaMon"]);
-            command.ExecuteNonQuery();
+            if (MyPublic.tonTaiKhoaChinh("MaMon", mamonTextBox.Text, "TheoDoiBaiThi"))
+            {
+                MessageBox.Show("Bạn phải xóa các bài thi có liên quan tới môn học này trước!", "Thông báo", MessageBoxButtons.OK);
+                return;
+            }
 
-            query = "DELETE FROM MonHoc WHERE MaMon=@MAMON";
-            command = new SqlCommand(query, MyPublic.connection);
+            string query = "DELETE FROM MonHoc WHERE MaMon=@MAMON";
+            SqlCommand command = new SqlCommand(query, MyPublic.connection);
             command.Parameters.AddWithValue("@MAMON", dsMonHoc.Rows[currentRow]["MaMon"]);
             command.ExecuteNonQuery();
 
@@ -172,20 +172,12 @@ namespace ChuDe1_Nhom3
             command.ExecuteNonQuery();
 
             toggleEdit(false);
-            if (action == "them")
-            {
-                mamonTextBox.Enabled = false;
-            }
         }
 
         private void khongluuBtn_Click(object sender, EventArgs e)
         {
             displayRowAt(dsMHGridView.CurrentRow.Index);
             toggleEdit(false);
-            if (action == "them")
-            {
-                mamonTextBox.Enabled = false;
-            }
         }
 
         private void dongBtn_Click(object sender, EventArgs e)
@@ -211,6 +203,7 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = false;
                 xoaBtn.Enabled = false;
 
+                if (action == "them") mamonTextBox.Enabled = true;
                 tenmonTextBox.Enabled = true;
                 tinchiTextBox.Enabled = true;
 
@@ -225,6 +218,7 @@ namespace ChuDe1_Nhom3
                 suaBtn.Enabled = true;
                 xoaBtn.Enabled = true;
 
+                if (action == "them") mamonTextBox.Enabled = false;
                 tenmonTextBox.Enabled = false;
                 tinchiTextBox.Enabled = false;
 
