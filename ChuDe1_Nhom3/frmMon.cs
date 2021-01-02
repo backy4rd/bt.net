@@ -195,36 +195,18 @@ namespace ChuDe1_Nhom3
 
         private void toggleEdit(bool flag)
         {
-            if (flag)
-            {
-                dsMHGridView.Enabled = false;
+            dsMHGridView.Enabled = !flag;
 
-                themBtn.Enabled = false;
-                suaBtn.Enabled = false;
-                xoaBtn.Enabled = false;
+            themBtn.Enabled = !flag;
+            suaBtn.Enabled = !flag;
+            xoaBtn.Enabled = !flag;
 
-                if (action == "them") mamonTextBox.Enabled = true;
-                tenmonTextBox.Enabled = true;
-                tinchiTextBox.Enabled = true;
+            if (action == "them") mamonTextBox.Enabled = flag;
+            tenmonTextBox.Enabled = flag;
+            tinchiTextBox.Enabled = flag;
 
-                luuBtn.Enabled = true;
-                khongluuBtn.Enabled = true;
-            }
-            else
-            {
-                dsMHGridView.Enabled = true;
-
-                themBtn.Enabled = true;
-                suaBtn.Enabled = true;
-                xoaBtn.Enabled = true;
-
-                if (action == "them") mamonTextBox.Enabled = false;
-                tenmonTextBox.Enabled = false;
-                tinchiTextBox.Enabled = false;
-
-                luuBtn.Enabled = false;
-                khongluuBtn.Enabled = false;
-            }
+            luuBtn.Enabled = flag;
+            khongluuBtn.Enabled = flag;
         }
     }
 }

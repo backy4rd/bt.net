@@ -100,8 +100,8 @@ namespace ChuDe1_Nhom3
         {
             action = "them";
             tenTKTextBox.Text = "";
-            quyenSDCBBox.SelectedValue = "";
-            maTTCBBox.SelectedValue = "";
+            quyenSDCBBox.SelectedIndex = -1;
+            maTTCBBox.SelectedIndex = -1;
 
             toggleEdit(true);
 
@@ -118,7 +118,7 @@ namespace ChuDe1_Nhom3
 
         private void luuBtn_Click(object sender, EventArgs e)
         {
-            if (tenTKTextBox.Text == "" || quyenSDCBBox.SelectedValue == "" || maTTCBBox.SelectedValue == "")
+            if (tenTKTextBox.Text == "" || quyenSDCBBox.SelectedIndex == -1 || maTTCBBox.SelectedIndex == -1)
             {
                 MessageBox.Show("Không được để trống thông tin!", "Thông báo", MessageBoxButtons.OK);
                 return;
@@ -233,36 +233,18 @@ namespace ChuDe1_Nhom3
 
         private void toggleEdit(bool flag)
         {
-            if (flag)
-            {
-                dsTKGridView.Enabled = false;
+            dsTKGridView.Enabled = !flag;
 
-                themBtn.Enabled = false;
-                suaBtn.Enabled = false;
-                xoaBtn.Enabled = false;
+            themBtn.Enabled = !flag;
+            suaBtn.Enabled = !flag;
+            xoaBtn.Enabled = !flag;
 
-                if (action == "them") tenTKTextBox.Enabled = true;
-                maTTCBBox.Enabled = true;
-                quyenSDCBBox.Enabled = true;
+            if (action == "them") tenTKTextBox.Enabled = flag;
+            maTTCBBox.Enabled = flag;
+            quyenSDCBBox.Enabled = flag;
 
-                luuBtn.Enabled = true;
-                khongluuBtn.Enabled = true;
-            }
-            else
-            {
-                dsTKGridView.Enabled = true;
-
-                themBtn.Enabled = true;
-                suaBtn.Enabled = true;
-                xoaBtn.Enabled = true;
-
-                if (action == "them") tenTKTextBox.Enabled = false;
-                maTTCBBox.Enabled = false;
-                quyenSDCBBox.Enabled = false;
-
-                luuBtn.Enabled = false;
-                khongluuBtn.Enabled = false;
-            }
+            luuBtn.Enabled = flag;
+            khongluuBtn.Enabled = flag;
         }
     }
 }

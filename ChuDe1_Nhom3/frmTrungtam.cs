@@ -187,36 +187,19 @@ namespace ChuDe1_Nhom3
 
         private void toggleEdit(bool flag)
         {
-            if (flag)
-            {
-                dgvTrungtam.Enabled = false;
+            dgvTrungtam.Enabled = !flag;
 
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+            btnThem.Enabled = !flag;
+            btnSua.Enabled = !flag;
+            btnXoa.Enabled = !flag;
 
-                if (action == "them") txtMatt.Enabled = true;
-                txtTentt.Enabled = true;
-                txtTinh.Enabled = true;
+            if (action == "them") txtMatt.Enabled = flag;
+            txtTentt.Enabled = flag;
+            txtTinh.Enabled = flag;
 
-                btnLuu.Enabled = true;
-                btnKhongluu.Enabled = true;
-            }
-            else
-            {
-                dgvTrungtam.Enabled = true;
+            btnLuu.Enabled = flag;
+            btnKhongluu.Enabled = flag;
 
-                btnThem.Enabled = true;
-                btnSua.Enabled = true;
-                btnXoa.Enabled = true;
-
-                if (action == "them") txtMatt.Enabled = false;
-                txtTentt.Enabled = false;
-                txtTinh.Enabled = false;
-
-                btnLuu.Enabled = false;
-                btnKhongluu.Enabled = false;
-            }
         }
     }
 }
