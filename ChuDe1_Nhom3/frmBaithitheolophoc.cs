@@ -15,7 +15,6 @@ namespace ChuDe1_Nhom3
     {
         DataSet lop = new DataSet();
         DataSet mon = new DataSet();
-        DataSet hocky = new DataSet();
         DataSet dsbaithi = new DataSet();
         DataView dvbaithi = new DataView();
         bool blnThem = false;
@@ -46,7 +45,11 @@ namespace ChuDe1_Nhom3
             txtSobaithi.ReadOnly = true;
             txtLanthi.ReadOnly = true;
             cbLophoc.Enabled = true;
-
+            rbtnHocky1.Enabled = false;
+            rbtnHocky2.Enabled = false;
+            dtpNgaythi.Enabled = false;
+            dtpNgaynhan.Enabled = false;
+            dtpHannop.Enabled = false;
         }
 
         void DieuKhienKhiThem()
@@ -61,10 +64,16 @@ namespace ChuDe1_Nhom3
             txtSobaithi.ReadOnly = false;
             txtLanthi.ReadOnly = false;
             cbLophoc.Enabled = false;
+            rbtnHocky1.Enabled = true;
+            rbtnHocky2.Enabled = true; 
+            cbMonhoc.Enabled = true;
             txtNamhoc.Clear();
             txtSobaithi.Clear();
             txtLanthi.Clear();
             cbMonhoc.Select();
+            dtpNgaythi.Enabled = true;
+            dtpNgaynhan.Enabled = true;
+            dtpHannop.Enabled = true;
         }
 
         void DieuKhienKhiChinhSua()
@@ -76,9 +85,13 @@ namespace ChuDe1_Nhom3
             btnKhongluu.Enabled = true;
             btnXoa.Enabled = false;
             txtSobaithi.Select();
-            cbHocki.Enabled = false;
+            rbtnHocky1.Enabled = true;
+            rbtnHocky2.Enabled = true; 
             cbMonhoc.Enabled = false;
             txtSobaithi.ReadOnly = false;
+            dtpNgaythi.Enabled = true;
+            dtpNgaynhan.Enabled = true;
+            dtpHannop.Enabled = true;
         }
 
         void GanDuLieu()
@@ -88,11 +101,14 @@ namespace ChuDe1_Nhom3
                 cbLophoc.SelectedValue = dgvBaithitheolop[0, dgvBaithitheolop.CurrentRow.Index].Value.ToString();
                 cbMonhoc.SelectedValue = dgvBaithitheolop[1, dgvBaithitheolop.CurrentRow.Index].Value.ToString();
                 txtLanthi.Text = dgvBaithitheolop[2, dgvBaithitheolop.CurrentRow.Index].Value.ToString();
-                cbHocki.SelectedValue = dgvBaithitheolop[3, dgvBaithitheolop.CurrentRow.Index].Value.ToString();
+                if (dgvBaithitheolop[3, dgvBaithitheolop.CurrentRow.Index].Value.ToString() == "1")
+                    rbtnHocky1.Checked = true;
+                else
+                    rbtnHocky2.Checked = true;
                 txtNamhoc.Text = dgvBaithitheolop[4, dgvBaithitheolop.CurrentRow.Index].Value.ToString();
                 dtpNgaythi.Value = DateTime.Parse(dgvBaithitheolop[5, dgvBaithitheolop.CurrentRow.Index].Value.ToString());
                 txtSobaithi.Text = dgvBaithitheolop[6, dgvBaithitheolop.CurrentRow.Index].Value.ToString();
-               
+
                 DateTime ngaynhan;
                 DateTime hannop;
 
@@ -111,7 +127,7 @@ namespace ChuDe1_Nhom3
                 else
                     dtpHannop.Value = DateTime.Parse(dgvBaithitheolop[8, dgvBaithitheolop.CurrentRow.Index].Value.ToString());
 
-              
+
             }
             else
             {
@@ -119,11 +135,14 @@ namespace ChuDe1_Nhom3
                 txtNamhoc.Clear();
                 txtSobaithi.Clear();
                 txtLanthi.Clear();
-                dtpNgaythi.Value = DateTime.Today;
-                cbHocki.SelectedIndex = -1;
+                dtpNgaythi.Value = DateTime.Today; 
+                dtpNgaynhan.Value = DateTime.Today;
+                dtpHannop.Value = DateTime.Today;
+                rbtnHocky1.Checked = false;
+                rbtnHocky2.Checked = false;
             }
         }
-       
+
         private void btnDongform_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -148,19 +167,11 @@ namespace ChuDe1_Nhom3
             cbMonhoc.DisplayMember = "TenMon";
             cbMonhoc.ValueMember = "MaMon";
 
-            hocky.Tables.Add("TheoDoiBaiThi");
-            hocky.Tables["TheoDoiBaiThi"].Columns.Add("HocKy");
-            hocky.Tables["TheoDoiBaiThi"].Rows.Add("1");
-            hocky.Tables["TheoDoiBaiThi"].Rows.Add("2");
-            cbHocki.DataSource = hocky;
-            cbHocki.DisplayMember = "TheoDoiBaiThi.HocKy";
-            cbHocki.ValueMember = "TheoDoiBaiThi.HocKy";
-
             dvbaithi.Table = dsbaithi.Tables["TheoDoiBaiThi"];
             dvbaithi.RowFilter = "MaLop like '" + cbLophoc.SelectedValue + "'";
 
             dgvBaithitheolop.DataSource = dvbaithi;
-            dgvBaithitheolop.Width = 702;
+            dgvBaithitheolop.Width = 723;
             dgvBaithitheolop.AllowUserToAddRows = false;
             dgvBaithitheolop.AllowUserToDeleteRows = false;
             dgvBaithitheolop.Columns[0].Width = 70;
@@ -197,8 +208,8 @@ namespace ChuDe1_Nhom3
 
         private void txtSobaithi_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            //    e.Handled = true;
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
         }
 
         private void dtpNgaythi_ValueChanged(object sender, EventArgs e)
@@ -233,7 +244,7 @@ namespace ChuDe1_Nhom3
 
         void Luu()
         {
-            string sql, hocky;
+            string sql, hocky = "1";
 
             if (blnThem == true)
                 sql = "Insert Into TheoDoiBaiThi Values(@MaMon, @MaLop, @LanThi, @HocKy, @NamHoc, @NgayThi, @SoBai, @NgayNhan, @HanNop)";
@@ -247,7 +258,8 @@ namespace ChuDe1_Nhom3
             command.Parameters.AddWithValue("@MaLop", cbLophoc.SelectedValue);
             command.Parameters.AddWithValue("@MaMon", cbMonhoc.SelectedValue);
             command.Parameters.AddWithValue("@LanThi", txtLanthi.Text);
-            hocky = cbHocki.SelectedValue.ToString();
+            if (rbtnHocky2.Checked)
+                hocky = "2";
             command.Parameters.AddWithValue("@HocKy", hocky);
             command.Parameters.AddWithValue("@NamHoc", txtNamhoc.Text);
             command.Parameters.AddWithValue("@NgayThi", dtpNgaythi.Value);
@@ -264,22 +276,31 @@ namespace ChuDe1_Nhom3
             }
             else
             {
-                int curRow = dgvBaithitheolop.CurrentRow.Index;
-                //dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow][1] = cbMonhoc.SelectedValue;
-                //dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow][2] = txtLanthi.Text;
-                //dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow][3] = hocky;
-                //dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow][4] = txtNamhoc.Text;
-                dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow][5] = dtpNgaythi.Value;
-                dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow][6] = txtSobaithi.Text;
-                dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow][7] = dtpNgaynhan.Value;
-                dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow][8] = dtpHannop.Value;
+                int curRow;
+                for (curRow = 0; curRow < dsbaithi.Tables["TheoDoiBaiThi"].Rows.Count; curRow++)
+                {
+                    var row = dsbaithi.Tables["TheoDoiBaiThi"].Rows[curRow];
+                    if (row[0].ToString() == cbLophoc.SelectedValue.ToString() &&
+                        row[1].ToString() == cbMonhoc.SelectedValue.ToString() &&
+                        row[2].ToString() == txtLanthi.Text &&
+                        row[3].ToString() == hocky &&
+                        row[4].ToString() == txtNamhoc.Text)
+                    {
+                        break;
+                    }
+                }
+                dvbaithi.Table.Rows[curRow][5] = dtpNgaythi.Value;
+                dvbaithi.Table.Rows[curRow][6] = txtSobaithi.Text;
+                dvbaithi.Table.Rows[curRow][7] = dtpNgaynhan.Value;
+                dvbaithi.Table.Rows[curRow][8] = dtpHannop.Value;
             }
             DieuKhienKhiBinhThuong();
+            
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if ((cbMonhoc.SelectedIndex == -1) || (txtNamhoc.Text == "") || (txtLanthi.Text == "") || (txtSobaithi.Text == "") || (cbHocki.SelectedIndex == -1))
+            if ((cbMonhoc.SelectedIndex == -1) || (txtNamhoc.Text == "") || (txtLanthi.Text == "") || (txtSobaithi.Text == "") || ((rbtnHocky1.Checked = false) && (rbtnHocky2.Checked = false)))
                 MessageBox.Show("Lỗi nhập dữ liệu !");
             else
                 Luu();
@@ -318,11 +339,6 @@ namespace ChuDe1_Nhom3
             DieuKhienKhiBinhThuong();
         }
 
-        private void dgvLophoc_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            GanDuLieu();
-        }
-
         private void cbLophoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((cbLophoc.SelectedIndex != -1) && (blnThem == false))
@@ -332,5 +348,12 @@ namespace ChuDe1_Nhom3
                 GanDuLieu();
             }
         }
+
+        private void dgvBaithitheolop_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            GanDuLieu();
+        }
+
+      
     }
 }
